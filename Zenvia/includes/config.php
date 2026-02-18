@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "zenvia_db";
+$db = "zenvia";
 
 $conn = new mysqli($host, $user, $pass, $db);
 

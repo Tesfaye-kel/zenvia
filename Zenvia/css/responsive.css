@@ -1,0 +1,455 @@
+/* Zenvia Social Network - Responsive Styles */
+
+/* Extra Small Devices (phones, less than 576px) */
+@media (max-width: 575px) {
+    .header-content {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 22px;
+    }
+    
+    .header-search {
+        display: none;
+    }
+    
+    .header-nav {
+        gap: 10px;
+    }
+    
+    .header-nav a {
+        font-size: 12px;
+    }
+    
+    .container {
+        padding: 10px;
+        margin-top: 60px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .post {
+        padding: 15px;
+    }
+    
+    .post-actions {
+        gap: 10px;
+    }
+    
+    .post-action {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .avatar-sm {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .avatar-md {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .avatar-lg {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .avatar-xl {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Small Devices (landscape phones, 576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .header-content {
+        padding: 12px 15px;
+    }
+    
+    .header-search {
+        max-width: 250px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .profile-cover {
+        height: 200px;
+    }
+    
+    .profile-info {
+        padding: 20px;
+        margin-top: -60px;
+    }
+    
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        top: -50px;
+    }
+    
+    .profile-details {
+        padding-top: 60px;
+    }
+    
+    .profile-name {
+        font-size: 22px;
+    }
+}
+
+/* Medium Devices (tablets, 768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 750px;
+    }
+    
+    .profile-cover {
+        height: 250px;
+    }
+    
+    .profile-info {
+        padding: 25px;
+        margin-top: -80px;
+    }
+    
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        top: -60px;
+    }
+}
+
+/* Large Devices (desktops, 992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        max-width: 970px;
+    }
+}
+
+/* Extra Large Devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+/* Grid System for Mobile */
+@media (max-width: 767px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+    .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    /* Hide sidebars on mobile */
+    .sidebar-left,
+    .sidebar-right {
+        display: none;
+    }
+}
+
+/* Navigation responsive */
+@media (max-width: 767px) {
+    .header-nav {
+        gap: 8px;
+    }
+    
+    .header-nav a {
+        padding: 5px 8px;
+    }
+}
+
+/* Form responsive */
+@media (max-width: 575px) {
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-row .form-group {
+        width: 100%;
+    }
+    
+    .search-box form {
+        flex-direction: column;
+    }
+    
+    .search-box button {
+        width: 100%;
+    }
+}
+
+/* Table responsive */
+@media (max-width: 767px) {
+    table {
+        font-size: 13px;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+}
+
+/* Modal responsive */
+@media (max-width: 575px) {
+    .modal {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+    }
+    
+    .modal-header {
+        padding: 10px 0;
+    }
+    
+    .modal-body {
+        padding: 15px 0;
+    }
+    
+    .modal-footer {
+        padding: 10px 0;
+    }
+}
+
+/* Profile page responsive */
+@media (max-width: 767px) {
+    .profile-cover {
+        height: 180px;
+    }
+    
+    .profile-info {
+        padding: 15px;
+        margin-top: -50px;
+    }
+    
+    .profile-avatar {
+        width: 80px;
+        height: 80px;
+        top: -40px;
+        left: 15px;
+    }
+    
+    .profile-details {
+        padding-top: 50px;
+    }
+    
+    .profile-name {
+        font-size: 20px;
+    }
+    
+    .profile-stats {
+        gap: 20px;
+    }
+    
+    .profile-stat-count {
+        font-size: 18px;
+    }
+    
+    .profile-actions {
+        flex-wrap: wrap;
+    }
+    
+    .profile-actions .btn {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
+}
+
+/* Feed responsive */
+@media (max-width: 991px) {
+    .feed {
+        max-width: 100%;
+    }
+}
+
+/* Friends page responsive */
+@media (max-width: 575px) {
+    .friend-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .friend-info {
+        order: 2;
+    }
+    
+    .friend-actions {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .friend-avatar {
+        order: 1;
+    }
+}
+
+/* Create post responsive */
+@media (max-width: 575px) {
+    .create-post {
+        padding: 15px;
+    }
+    
+    .create-post-header {
+        gap: 10px;
+    }
+    
+    .create-post-avatar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .create-post input[type="text"] {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .create-post-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .create-post-options {
+        width: 100%;
+        justify-content: space-around;
+    }
+    
+    .btn-post {
+        width: 100%;
+    }
+}
+
+/* Post detail responsive */
+@media (max-width: 575px) {
+    .post-detail {
+        padding: 15px;
+    }
+    
+    .post-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .post-user-info h3 {
+        font-size: 14px;
+    }
+    
+    .post-user-info span {
+        font-size: 11px;
+    }
+}
+
+/* Search results responsive */
+@media (max-width: 575px) {
+    .result-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .result-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .result-info {
+        order: 2;
+    }
+    
+    .btn-view {
+        order: 3;
+        width: 100%;
+    }
+}
+
+/* Edit profile responsive */
+@media (max-width: 575px) {
+    .edit-profile {
+        padding: 20px 15px;
+    }
+    
+    .edit-profile h1 {
+        font-size: 20px;
+    }
+    
+    .form-section h2 {
+        font-size: 16px;
+    }
+    
+    .current-photo img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Login/Register page responsive */
+@media (max-width: 575px) {
+    .login-container,
+    .register-container {
+        padding: 25px 20px;
+    }
+    
+    .login-header h1,
+    .register-header h1 {
+        font-size: 24px;
+    }
+    
+    .form-group input {
+        padding: 10px 12px;
+    }
+    
+    .btn-login,
+    .btn-register {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+/* Footer responsive */
+@media (max-width: 575px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}

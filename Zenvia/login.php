@@ -14,8 +14,16 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
+    $captcha = $_POST['captcha'] ?? '';
     
-    if (empty($username) || empty($password)) {
+    // Validate captcha
+    if (empty($captcha)) {
+        $error = "Please enter the captcha code";
+    } elseif (!isset($_SESSION['captcha_code'])) {
+        $error = "Captcha session expired, please try again";
+    } elseif (strtoupper($captcha) !== strtoupper($_SESSION['captcha_code'])) {
+        $error = "Invalid captcha code";
+    } elseif (empty($username) || empty($password)) {
         $error = "Username and password are required";
     } else {
         // Check user credentials
@@ -196,6 +204,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 padding: 30px 20px;
             }
         }
+        
+        /* 3D Flip Animation */
+        .page-transition {
+            perspective: 1000px;
+        }
+        
+        .login-container {
+            animation: flipIn 0.6s ease-in-out;
+        }
+        
+        @keyframes flipIn {
+            0% {
+                opacity: 0;
+                transform: rotateY(-90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+        
+        .register-link a {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .register-link a:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -209,7 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         
-        <form method="POST" action="">
+        <form method="POST" id="login-form" action="">
             <div class="form-group">
                 <label for="username">Username or Email</label>
                 <input type="text" id="username" name="username" placeholder="Enter username or email" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
@@ -218,6 +255,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="captcha">Captcha Code *</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <img src="captcha.php" alt="Captcha" style="border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="this.src='captcha.php?'+Math.random();">
+                    <input type="text" id="captcha" name="captcha" placeholder="Enter captcha code" required style="flex: 1;">
+                </div>
             </div>
             
             <button type="submit" class="btn-login">Login</button>

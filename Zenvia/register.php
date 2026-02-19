@@ -19,9 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirm_password = $_POST['confirm_password'];
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
+    $captcha = $_POST['captcha'] ?? '';
     
-    // Validation
-    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
+    // Validate captcha first
+    if (empty($captcha)) {
+        $error = "Please enter the captcha code";
+    } elseif (!isset($_SESSION['captcha_code'])) {
+        $error = "Captcha session expired, please try again";
+    } elseif (strtoupper($captcha) !== strtoupper($_SESSION['captcha_code'])) {
+        $error = "Invalid captcha code";
+    } elseif (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
         $error = "All fields are required";
     } elseif ($password !== $confirm_password) {
         $error = "Passwords do not match";
@@ -209,6 +216,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 gap: 0;
             }
         }
+        
+        /* 3D Flip Animation */
+        .page-transition {
+            perspective: 1000px;
+        }
+        
+        .register-container {
+            animation: flipIn 0.6s ease-in-out;
+        }
+        
+        @keyframes flipIn {
+            0% {
+                opacity: 0;
+                transform: rotateY(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+        
+        .login-link a {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .login-link a:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -226,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
         <?php endif; ?>
         
-        <form method="POST" action="">
+        <form method="POST" id="register-form" action="">
             <div class="form-row">
                 <div class="form-group">
                     <label for="first_name">First Name</label>
@@ -256,6 +292,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group">
                 <label for="confirm_password">Confirm Password *</label>
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="captcha">Captcha Code *</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <img src="captcha.php" alt="Captcha" style="border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="this.src='captcha.php?'+Math.random();">
+                    <input type="text" id="captcha" name="captcha" placeholder="Enter captcha code" required style="flex: 1;">
+                </div>
             </div>
             
             <button type="submit" class="btn-register">Create Account</button>

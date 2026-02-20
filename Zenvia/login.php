@@ -14,16 +14,8 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
-    $captcha = $_POST['captcha'] ?? '';
     
-    // Validate captcha
-    if (empty($captcha)) {
-        $error = "Please enter the captcha code";
-    } elseif (!isset($_SESSION['captcha_code'])) {
-        $error = "Captcha session expired, please try again";
-    } elseif (strtoupper($captcha) !== strtoupper($_SESSION['captcha_code'])) {
-        $error = "Invalid captcha code";
-    } elseif (empty($username) || empty($password)) {
+    if (empty($username) || empty($password)) {
         $error = "Username and password are required";
     } else {
         // Check user credentials
@@ -71,206 +63,167 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="icon" href="images/logo.png" type="image/png">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            background: #1a1a2e;
+            position: relative;
         }
-        
-        .login-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
+
+        /* Main Container for the Form */
+        .app-container {
+            width: 400px;
+            background: #2d2d44;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* The Form */
+        .form-side {
             padding: 40px;
+            background: #2d2d44;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        
-        .login-header {
-            text-align: center;
+
+        .form-side h2 {
             margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #fff;
+            text-align: center;
         }
-        
-        .login-header h1 {
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        .login-header p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .form-group {
+
+        .input-group {
+            position: relative;
             margin-bottom: 20px;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-            font-size: 14px;
-        }
-        
-        .form-group input {
+        .input-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus {
+            padding: 14px 15px;
+            padding-left: 40px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #1a1a2e;
+            color: #fff;
             outline: none;
-            border-color: #667eea;
+            font-size: 0.95rem;
         }
         
-        .error-message {
-            background: #fee;
-            border: 1px solid #fcc;
-            color: #c33;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 14px;
+        .input-group input::placeholder {
+            color: #888;
         }
         
-        .btn-login {
+        .input-group input:focus {
+            border-color: #666;
+        }
+        
+        .input-group .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #4a4a6a;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 8px;
+            color: #fff;
             font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
         }
         
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        .btn:hover {
+            background: #5a5a7a;
         }
-        
-        .register-link {
+
+        .footer-link {
             text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #888;
         }
         
-        .register-link a {
-            color: #667eea;
+        .footer-link a {
+            color: #aaa;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
         }
         
-        .register-link a:hover {
-            text-decoration: underline;
+        .footer-link a:hover {
+            color: #fff;
+        }
+
+        /* Error/Success Messages */
+        .message {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
         }
         
-        .forgot-password {
-            text-align: center;
-            margin-top: 15px;
+        .message.error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ff6b7a;
         }
-        
-        .forgot-password a {
-            color: #666;
-            font-size: 13px;
-            text-decoration: none;
-        }
-        
-        .forgot-password a:hover {
-            color: #667eea;
-            text-decoration: underline;
-        }
-        
+
+        /* Responsive for mobile */
         @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 20px;
+            .app-container {
+                width: 90%;
             }
-        }
-        
-        /* 3D Flip Animation */
-        .page-transition {
-            perspective: 1000px;
-        }
-        
-        .login-container {
-            animation: flipIn 0.6s ease-in-out;
-        }
-        
-        @keyframes flipIn {
-            0% {
-                opacity: 0;
-                transform: rotateY(-90deg);
+            .form-side {
+                padding: 30px;
             }
-            100% {
-                opacity: 1;
-                transform: rotateY(0);
-            }
-        }
-        
-        .register-link a {
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-        
-        .register-link a:hover {
-            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h1>Welcome Back</h1>
-            <p>Login to your Zenvia account</p>
-        </div>
+
+<div class="app-container">
+    <div class="form-side">
+        <h2>Welcome Back</h2>
         
         <?php if ($error): ?>
-            <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+            <div class="message error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
         
-        <form method="POST" id="login-form" action="">
-            <div class="form-group">
-                <label for="username">Username or Email</label>
-                <input type="text" id="username" name="username" placeholder="Enter username or email" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+        <form method="POST" id="login-form">
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username or Email" required value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
+                <span class="input-icon">👤</span>
             </div>
             
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+                <span class="input-icon">🔒</span>
             </div>
             
-            <div class="form-group">
-                <label for="captcha">Captcha Code *</label>
-                <div style="display: flex; gap: 10px; align-items: center;">
-                    <img src="captcha.php" alt="Captcha" style="border: 1px solid #ddd; border-radius: 5px; cursor: pointer;" onclick="this.src='captcha.php?'+Math.random();">
-                    <input type="text" id="captcha" name="captcha" placeholder="Enter captcha code" required style="flex: 1;">
-                </div>
-            </div>
-            
-            <button type="submit" class="btn-login">Login</button>
+            <button type="submit" class="btn">Log In</button>
         </form>
         
-        <div class="register-link">
+        <div class="footer-link">
             Don't have an account? <a href="register.php">Register here</a>
         </div>
     </div>
+</div>
+
 </body>
 </html>

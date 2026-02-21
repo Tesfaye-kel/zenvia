@@ -32,11 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['post_content'])) {
     
     // Handle image upload
     if (isset($_FILES['post_image']) && $_FILES['post_image']['error'] == 0) {
-        $target_dir = "images/post_images/";
+        $target_dir = dirname(__DIR__) . "/images/post_images/";
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
         $file_name = time() . '_' . basename($_FILES['post_image']['name']);
         $target_file = $target_dir . $file_name;
         
-        if (move_uploaded_file($_FILES['post_image']['tmp_name'], $target_file)) {
+        if (copy($_FILES['post_image']['tmp_name'], $target_file)) {
             $image = $file_name;
         }
     }

@@ -34,15 +34,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Handle profile picture upload
     $profile_pic = $user['profile_pic'];
     if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
-        $target_dir = "images/profile_pics/";
+        // Use absolute path for the upload directory
+        $target_dir = dirname(__DIR__) . "/images/profile_pics/";
+        
+        // Create directory if it doesn't exist
+        if (!is_dir($target_dir)) {
+            if (!mkdir($target_dir, 0777, true)) {
+                $error = "Failed to create upload folder.";
+            }
+        }
+        
         $file_name = time() . '_' . basename($_FILES['profile_pic']['name']);
         $target_file = $target_dir . $file_name;
         
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
-            if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $target_file)) {
+            // Use copy() instead of move_uploaded_file() for local development (XAMPP)
+            if (copy($_FILES['profile_pic']['tmp_name'], $target_file)) {
                 $profile_pic = $file_name;
+            } else {
+                // Debug: Show more details about the error
+                $error = "Upload failed. Temp: " . $_FILES['profile_pic']['tmp_name'] . " -> Target: " . $target_file;
             }
+        } else {
+            $error = "Invalid file type. Only JPG, JPEG, PNG and GIF are allowed.";
         }
     }
     

@@ -12,7 +12,62 @@ document.addEventListener('DOMContentLoaded', function() {
     initImagePreview();
     initAutoResize();
     initSearchHighlight();
+    initThemeToggle();
 });
+
+/**
+ * Initialize theme toggle functionality
+ */
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+    
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Add click event listener
+    themeToggle.addEventListener('click', function() {
+        toggleTheme();
+    });
+}
+
+/**
+ * Toggle between light and dark mode
+ */
+function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    
+    // Save preference to localStorage
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+/**
+ * Set specific theme
+ */
+function setTheme(theme) {
+    if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+/**
+ * Get current theme
+ */
+function getCurrentTheme() {
+    return document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+}
 
 /**
  * Initialize like button functionality

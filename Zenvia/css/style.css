@@ -572,3 +572,374 @@ img {
 
 .hidden { display: none; }
 .visible { display: block; }
+
+/* ============================================
+   DARK MODE STYLES
+   ============================================ */
+
+/* Dark Mode Theme Variables */
+body.dark-mode {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-card: #1f2937;
+    --bg-input: #374151;
+    --text-primary: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    --border-color: #374151;
+    --border-light: #4b5563;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --accent-green: #10b981;
+    --accent-green-hover: #059669;
+    --danger-bg: #7f1d1d;
+    --danger-border: #fca5a5;
+    --success-bg: #064e3b;
+    --success-border: #6ee7b7;
+    --warning-bg: #78350f;
+    --warning-border: #fcd34d;
+    --info-bg: #1e3a8a;
+    --info-border: #93c5fd;
+}
+
+/* Apply Dark Mode */
+body.dark-mode {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+body.dark-mode .header {
+    background: var(--bg-card);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+body.dark-mode .logo {
+    color: var(--accent-green);
+}
+
+body.dark-mode .logo:hover {
+    color: var(--accent-green-hover);
+}
+
+body.dark-mode .header-search input {
+    background: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .header-search input:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+body.dark-mode .header-search input::placeholder {
+    color: var(--text-muted);
+}
+
+body.dark-mode .header-nav a {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .header-nav a:hover {
+    color: var(--text-primary);
+}
+
+body.dark-mode .user-avatar {
+    border-color: var(--border-light);
+}
+
+body.dark-mode .user-avatar:hover {
+    border-color: var(--accent-green);
+}
+
+/* Cards in Dark Mode */
+body.dark-mode .card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: 0 1px 3px var(--shadow), 0 4px 12px var(--shadow);
+}
+
+body.dark-mode .card-header {
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .card-title {
+    color: var(--text-primary);
+}
+
+/* Forms in Dark Mode */
+body.dark-mode .form-group label {
+    color: var(--text-primary);
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea,
+body.dark-mode .form-group select {
+    background: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus,
+body.dark-mode .form-group select:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Buttons in Dark Mode */
+body.dark-mode .btn-secondary {
+    background: var(--bg-input);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: var(--border-light);
+    border-color: var(--border-light);
+}
+
+body.dark-mode .btn-danger {
+    background: var(--danger-bg);
+    color: #fca5a5;
+    border-color: var(--danger-border);
+}
+
+body.dark-mode .btn-danger:hover {
+    background: #991b1b;
+}
+
+body.dark-mode .btn-success {
+    background: var(--success-bg);
+    color: #6ee7b7;
+    border-color: var(--success-border);
+}
+
+body.dark-mode .btn-success:hover {
+    background: #065f46;
+}
+
+/* Posts in Dark Mode */
+body.dark-mode .post {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: 0 1px 3px var(--shadow), 0 4px 12px var(--shadow);
+}
+
+body.dark-mode .post-user-info h4 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .post-user-info h4 a {
+    color: var(--text-primary);
+}
+
+body.dark-mode .post-user-info h4 a:hover {
+    color: var(--accent-green);
+}
+
+body.dark-mode .post-user-info span {
+    color: var(--text-muted);
+}
+
+body.dark-mode .post-content {
+    color: var(--text-primary);
+}
+
+body.dark-mode .post-actions {
+    border-top-color: var(--border-color);
+}
+
+body.dark-mode .post-action {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .post-action:hover {
+    background: var(--bg-input);
+    color: var(--accent-green);
+}
+
+/* Comments in Dark Mode */
+body.dark-mode .comment-content {
+    background: var(--bg-input);
+}
+
+body.dark-mode .comment-user {
+    color: var(--text-primary);
+}
+
+body.dark-mode .comment-text {
+    color: var(--text-primary);
+}
+
+body.dark-mode .comment-form input {
+    background: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+body.dark-mode .comment-form input:focus {
+    border-color: var(--accent-green);
+    background: var(--bg-input);
+}
+
+body.dark-mode .comment-form input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Messages in Dark Mode */
+body.dark-mode .message-received {
+    background: var(--bg-input);
+    color: var(--text-primary);
+}
+
+/* Notifications in Dark Mode */
+body.dark-mode .notification {
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-mode .notification:hover {
+    background: var(--bg-input);
+}
+
+body.dark-mode .notification.unread {
+    background: var(--success-bg);
+}
+
+body.dark-mode .notification-text {
+    color: var(--text-primary);
+}
+
+body.dark-mode .notification-time {
+    color: var(--text-muted);
+}
+
+/* Alerts in Dark Mode */
+body.dark-mode .alert-success {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+    color: #6ee7b7;
+}
+
+body.dark-mode .alert-error {
+    background: var(--danger-bg);
+    border-color: var(--danger-border);
+    color: #fca5a5;
+}
+
+body.dark-mode .alert-warning {
+    background: var(--warning-bg);
+    border-color: var(--warning-border);
+    color: #fcd34d;
+}
+
+body.dark-mode .alert-info {
+    background: var(--info-bg);
+    border-color: var(--info-border);
+    color: #93c5fd;
+}
+
+/* Pagination in Dark Mode */
+body.dark-mode .pagination a,
+body.dark-mode .pagination span {
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+body.dark-mode .pagination a:hover {
+    background: var(--accent-green);
+    color: white;
+    border-color: var(--accent-green);
+}
+
+body.dark-mode .pagination .active {
+    background: var(--accent-green);
+    color: white;
+    border-color: var(--accent-green);
+}
+
+/* Loading in Dark Mode */
+body.dark-mode .loading {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .spinner {
+    border-color: var(--border-color);
+    border-top-color: var(--accent-green);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+    background: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+.theme-toggle .moon-icon {
+    display: block;
+}
+
+body.dark-mode .theme-toggle .sun-icon {
+    display: block;
+}
+
+body.dark-mode .theme-toggle .moon-icon {
+    display: none;
+}
+
+/* Search Results in Dark Mode */
+body.dark-mode .search-result,
+body.dark-mode .result-item,
+body.dark-mode .friend-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .search-result:hover,
+body.dark-mode .result-item:hover,
+body.dark-mode .friend-card:hover {
+    background: var(--bg-input);
+}
+
+/* Container adjustments */
+body.dark-mode .container {
+    background: transparent;
+}
+
+/* Smooth transition for theme change */
+body,
+body .card,
+body .post,
+body .header,
+body .form-group input,
+body .form-group textarea,
+body .form-group select,
+body .comment-content,
+body .btn {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

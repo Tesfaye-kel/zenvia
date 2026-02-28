@@ -245,7 +245,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     </style>
-</head>
+ </head>
 <body>
 
 <div class="app-container">

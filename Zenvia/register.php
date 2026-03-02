@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .input-group input {
             width: 100%;
             padding: 14px 15px;
-            padding-left: 40px;
+            padding-left: 48px;
             border-radius: 8px;
             border: 1px solid #444;
             background: #1a1a2e;

@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Handle comment creation
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'add_comment') {
-    header('Content-Type: application/json');
+     header('Content-Type: application/json');
     
     $post_id = $_POST['post_id'];
     $content = trim($_POST['content']);

@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
+ $user_id = $_SESSION['user_id'];
 
 // Fetch currently logged-in user's data using PDO with prepared statement
 $stmt = $conn->prepare("SELECT username, email, profile_pic, first_name, last_name FROM users WHERE id = ?");

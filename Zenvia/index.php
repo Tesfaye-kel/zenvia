@@ -19,7 +19,7 @@ $stmt->close();
 
 // Get all posts with user info
 $posts_query = "SELECT posts.*, users.username, users.first_name, users.last_name, users.profile_pic 
-                FROM posts 
+                 FROM posts 
                 LEFT JOIN users ON posts.user_id = users.id 
                 ORDER BY posts.created_at DESC";
 $posts_result = $conn->query($posts_query);

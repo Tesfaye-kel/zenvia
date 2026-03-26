@@ -1,6 +1,6 @@
 -- Zenvia Social Network Database Schema
 
--- Create database if not exists
+-- Create database 
 CREATE DATABASE IF NOT EXISTS zenvia;
 USE zenvia;
 

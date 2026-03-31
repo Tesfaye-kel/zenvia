@@ -2,8 +2,8 @@
 session_start();
 require_once 'includes/config.php';
 
-// Redirect if already logged in
-if (isset($_SESSION['user_id'])) {
+
+ if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
      exit();
 }

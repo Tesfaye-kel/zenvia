@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?phpsession_start();
 require_once 'includes/config.php';
 
 // Check if user is logged in

@@ -9,9 +9,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Get current user info
-$user_id = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->bind_param("i", $user_id);
+ $user_id = $_SESSION['user_id'];
+ $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $user_result = $stmt->get_result();
 $current_user = $user_result->fetch_assoc();

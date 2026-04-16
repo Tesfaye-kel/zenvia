@@ -4,7 +4,7 @@ require_once 'includes/config.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Content-Type: application/json');
+    header('Content-Type: application/json'); 
     echo json_encode(['success' => false, 'message' => 'Please login first']);
     exit();
 }
